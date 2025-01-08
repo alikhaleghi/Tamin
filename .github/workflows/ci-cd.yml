@@ -1,0 +1,63 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Trigger on pushes to the main branch
+  pull_request:  # Trigger on pull requests to the main branch
+    branches:
+      - main
+
+jobs:
+  # Job 1: Run PHP Tests
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1  # Adjust PHP version as needed
+          extensions: mbstring, intl
+          coverage: xdebug  # Add xdebug for code coverage
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Run tests
+        run: vendor/bin/phpunit
+
+  # Job 2: Publish to npm
+  publish-npm:
+    needs: test  # Run this job only if tests pass
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          registry-url: 'https://registry.npmjs.org/'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish
+
+  # Job 3: Notify via Slack or Email (Optional)
+  notify:
+    needs: [test, publish-npm]  # Run after tests and npm publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Notify success
+        run: echo "Deployment completed!"  # Replace with a Slack or email notification if desired

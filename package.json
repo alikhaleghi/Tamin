@@ -1,5 +1,5 @@
 {
-  "name": "codeigniter4-tamin",
+  "name": "tamin",
   "version": "1.0.0",
   "description": "A helper library for CodeIgniter 4",
   "main": "src/Core.php",
