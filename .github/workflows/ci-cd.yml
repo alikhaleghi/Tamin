@@ -15,12 +15,12 @@ jobs:
 
     steps:
       - name: Check vendor directory structure
-        run: ls -R vendor
-      - name: Check vendor directory structure
         run: ls -R .
         
       - name: List installed Composer packages
         run: composer show
+      - name: Check vendor directory structure
+        run: ls -R vendor
       
     
       - name: Checkout code
