@@ -1,6 +1,6 @@
 {
   "name": "tamin",
-  "version": "1.0.2",
+  "version": "0.0.2A1",
   "description": "A helper library for CodeIgniter 4",
   "main": "src/Core.php",
   "require-dev": {
