@@ -14,11 +14,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check vendor directory structure
+        run: ls -R vendor
+      - name: Check vendor directory structure
+        run: ls -R .
+        
       - name: List installed Composer packages
         run: composer show
       
-      - name: Check vendor directory structure
-        run: ls -R vendor
     
       - name: Checkout code
         uses: actions/checkout@v3
