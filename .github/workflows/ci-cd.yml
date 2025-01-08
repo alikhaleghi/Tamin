@@ -69,10 +69,10 @@ jobs:
         run: npm install
 
       # Step 4: Publish the package to npm
-      - name: Publish to npm
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish
+      # - name: Publish to npm
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      #   run: npm publish
 
   # Job 3: Notify via Slack or Email (Optional)
   notify:
