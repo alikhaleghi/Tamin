@@ -14,18 +14,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check vendor directory structure
-        run: ls -R .
-        
-      - name: List installed Composer packages
-        run: composer show
-      - name: Check vendor directory structure
-        run: ls -R vendor
-      
-    
+      # Step 1: Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Step 2: Debug to confirm files are checked out
+      - name: Debug checkout directory
+        run: |
+          echo "Current directory structure:"
+          ls -R .
+
+      # Step 3: Setup PHP environment
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -33,9 +32,18 @@ jobs:
           extensions: mbstring, intl
           coverage: xdebug  # Add xdebug for code coverage
 
+      # Step 4: Install PHP dependencies
       - name: Install dependencies
         run: composer install --no-interaction --prefer-dist
 
+      # Step 5: Additional debug steps (optional)
+      - name: List installed Composer packages
+        run: composer show
+
+      - name: Check vendor directory structure
+        run: ls -R vendor
+
+      # Step 6: Run PHP tests
       - name: Run tests
         run: vendor/bin/phpunit
 
@@ -45,18 +53,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Step 2: Setup Node.js environment
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
           registry-url: 'https://registry.npmjs.org/'
 
+      # Step 3: Install Node.js dependencies
       - name: Install dependencies
         run: npm install
 
+      # Step 4: Publish the package to npm
       - name: Publish to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
