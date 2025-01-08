@@ -1,2 +1,5 @@
 .git
 vendor
+.gitignore
+.github
+composer.lock
