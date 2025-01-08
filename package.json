@@ -1,0 +1,12 @@
+{
+  "name": "codeigniter4-tamin",
+  "version": "1.0.0",
+  "description": "A helper library for CodeIgniter 4",
+  "main": "src/Core.php",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/alikhaleghi/tamin.git"
+  },
+  "author": "Ali Khaleghi",
+  "license": "MIT"
+}

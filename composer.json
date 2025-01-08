@@ -1,0 +1,13 @@
+{
+  "name": "alikhaleghi/tamin",
+  "description": "A helper library for CodeIgniter 4",
+  "type": "library",
+  "require": {
+      "php": ">=7.4"
+  },
+  "autoload": {
+      "psr-4": {
+          "AliKhaleghi\\Tamin\\": "src/"
+      }
+  }
+}
